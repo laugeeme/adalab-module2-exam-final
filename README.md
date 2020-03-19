@@ -1,18 +1,15 @@
+# Module 2 - final evaluation - laurageeme: BUSCADOR DE SERIES
 
+El ejercicio consiste en desarrollar una aplicación web de búsqueda de series de TV, que nos permite des/marcar las series como favoritas y guardarlas en local storage.
 
-# Module 2 - final evaluation - laurageeme
+Para el desarrollo de este ejercicio hemos utilizado la siguiente API: http://www.tvmaze.com/api#show-search
 
 ## Guía de inicio rápido
-
-
 
 > ### Solo una vez al principio en cada ordenador que utilicemos:
 
 - Instalamos node
 - Instalamos el comando de gulp de forma global para poder usarlo desde cualquier carpeta usando `npm install --global gulp-cli`
-
-
-
 
 ## Estructura del proyecto
 
@@ -56,5 +53,3 @@ Podemos usar parciales de JS: en el JSON de configuración, **config.json** espe
 ## ¿Cómo actualizo si tengo una versión anterior?
 
 En principio puedes descargar todos los archivos fuera de **\_src/** y sustituir los de tu proyecto. Además deberías replicar la estructura de carpetas dentro de **\_src/**.
-
-
