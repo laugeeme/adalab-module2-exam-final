@@ -2,12 +2,12 @@
 
 const urlBase = 'http://api.tvmaze.com/search/shows?q=';
 const ulElem = document.querySelector('.tvShows-list');
-const favElem = document.querySelector('.favourites');
+const favElem = document.querySelector('#favouritesList');
 const inputValue = document.querySelector('.searchInput');
 const searchButton = document.querySelector('.buttonSearch');
 
 let tvShowsList = [];
-let favourites = [];
+const favourites = readLocalStorage();
 
 //1.Función llamar a la Api
 
@@ -20,6 +20,7 @@ function conectToApi() {
     .then(data => {
       tvShowsList = data;
       renderTvShows(tvShowsList);
+      renderFavourites(favourites);
     });
 }
 
@@ -46,15 +47,61 @@ function addClickListeners() {
   }
 }
 
+//4.Función que setea el LocalStorage.
 
-
-
-
-
-
-function saveFavourites() {
-  
+function setLocalStorage(favourites) {
+  localStorage.setItem('tvShowInfo', JSON.stringify(favourites));
+  // meter por cada indice su id y su valor, en local storage para que carguen con todas las busquedas
 }
+
+//5.Función que recoge el valor de LocalStorage, lee y parsea la info.
+
+function readLocalStorage() {
+  let localInfo = JSON.parse(localStorage.getItem('tvShowInfo'));
+  if (localInfo !== null) {
+    return localInfo;
+  } else {
+    return (localInfo = []);
+  }
+}
+
+//6. Función que guarda favoritos al hacer click.
+
+function saveFavourites(evt) {
+  const index = parseInt(evt.currentTarget.id);
+
+  if (favourites.indexOf(index) === -1) {
+    favourites.push(index);
+    setLocalStorage(favourites);
+    renderFavourites(favourites);
+  } else {
+    alert('Ya has añadido esta serie a favoritos');
+  }
+}
+
+//7.Función que relaciona el favorito con su ID ,lo lee y devuelve el objeto para pintar en favoritos.
+
+function getTvShowObject(idTvShow) {
+  for (let item of tvShowsList) {
+    if (item.show.id === idTvShow) {
+      return item;
+    }
+  }
+}
+
+//8.Función que nos pinta el contenido de favoritos.
+
+function renderFavourites(favouritesArr) {
+  favElem.innerHTML = '';
+  for (let favourite of favouritesArr) {
+    let tvShowObject = getTvShowObject(favourite);
+
+    if (tvShowObject) {
+      favElem.innerHTML += `<li id=${tvShowObject.show.id}><img src='${tvShowObject.show.image.medium}' alt='Poster'</img><p>${tvShowObject.show.name}</p><button type="button">Borrar</button></li>`;
+    }
+  }
+}
+
 searchButton.addEventListener('click', conectToApi);
 
 //# sourceMappingURL=main.js.map
