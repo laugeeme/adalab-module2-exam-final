@@ -228,7 +228,43 @@ sup {
   text-align: center;
   font-family: 'Roboto';
   color: whitesmoke;
-  font-size: 40px;
+  font-size: 70px;
+  text-shadow: #5a5757 2px 2px;
+}
+
+.main-container {
+  margin-left: 430px;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.main-container ul li {
+  margin: 30px;
+}
+
+.tvShows-list {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  max-width: 90vw;
+  margin: auto;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.show-title {
+  text-align: center;
+  font-family: 'Roboto';
+  color: whitesmoke;
+  font-size: 20px;
   text-shadow: #5a5757 2px 2px;
 }
 

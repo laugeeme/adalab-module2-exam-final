@@ -26,7 +26,7 @@ function conectToApi() {
 
 function renderTvShows(tvShowsArr) {
   for (let item of tvShowsArr) {
-    ulElem.innerHTML += `<li id='${item.show.id}' class='tvShow-list_item'><img src='${item.show.image.medium}' alt='Poster'</img><p class='main-title'>${item.show.name}</p></li>`;
+    ulElem.innerHTML += `<li id='${item.show.id}' class='tvShow-list_item'><img src='${item.show.image.medium}' alt='Poster'</img><p class='show-title'>${item.show.name}</p></li>`;
   }
 }
 

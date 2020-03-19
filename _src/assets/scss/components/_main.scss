@@ -1,0 +1,31 @@
+.main-container {
+  margin-left: 430px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+
+  & ul li{
+      margin: 30px;
+  }
+
+}
+
+.tvShows-list{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 90vw;
+    margin: auto;
+    justify-content: center;
+}
+
+
+
+
+.show-title {
+  text-align: center;
+  font-family: 'Roboto';
+  color: whitesmoke;
+  font-size: 20px;
+  text-shadow: rgb(90, 87, 87) 2px 2px;
+}
