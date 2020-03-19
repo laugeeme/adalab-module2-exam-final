@@ -1,0 +1,34 @@
+
+aside{
+    position: fixed;
+    width: 440px;
+    height: 100vh;
+    left: 0;
+    top: 90px;
+    background:white;
+    border-radius: 5px;
+  }
+  
+
+.searchInput{
+    width: 300px;
+    height: 50px;
+    padding: 10px;
+    margin-left: 15px;
+    margin-top: 20px;
+    border: 2px solid grey;
+    font-family: 'Roboto';
+    background-color: white;
+    border-radius: 5px;
+}
+
+.buttonSearch{
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+    font-family:'Roboto';
+    border-radius: 5px;
+    background-color: grey;
+    color: white;
+}
+
