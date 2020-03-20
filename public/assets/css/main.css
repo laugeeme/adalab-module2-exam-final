@@ -283,6 +283,7 @@ sup {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+  padding-bottom: 100px;
 }
 
 .page__aside .search-container .searchInput {
@@ -312,12 +313,27 @@ sup {
 }
 
 .page__aside .favourites-container .favourites li {
-  padding-top: 20px;
+  padding: 20px;
   font-family: 'Roboto';
   list-style-type: none;
   font-size: 15px;
   margin: auto;
   text-align: center;
+  font-size: 20px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.page__aside .favourites-container .favourites .close {
+  cursor: pointer;
+  padding-left: 10px;
+  padding-right: 10px;
+  opacity: 0.3;
+}
+
+.page__aside .favourites-container .favourites .close:hover {
+  opacity: 1;
 }
 
 /*# sourceMappingURL=main.css.map */

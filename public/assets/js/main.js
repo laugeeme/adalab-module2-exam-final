@@ -23,14 +23,14 @@ function conectToApi() {
     });
 }
 
-//2.Función pintar la película (añadimos ID para comprobar luego que no la tenemos si ya la hemos añadido a favoritos)
+//2.Función pintar los resultados de la búsqueda (añadimos ID para comprobar luego que no la tenemos si ya la hemos añadido a favoritos)
 
 function printTvShows(tvShowsArr) {
   for (let item of tvShowsArr) {
     if (item.show.image !== null) {
       ulElem.innerHTML += `<li id='${item.show.id}' class='tvShow-list_item'><img src='${item.show.image.medium}' alt='Poster'</img><p class='show-title'>${item.show.name}</p></li>`;
     } else {
-      ulElem.innerHTML += `<li id='${item.show.id}' class='tvShow-list_item'><img src='https://via.placeholder.com/210x295/ffffff/666666/?text=TV' alt='Poster'</img><p class='show-title'>${item.show.name}</p></li>`;
+      ulElem.innerHTML += `<li id='${item.show.id}' class='tvShow-list_item'><img src='https://via.placeholder.com/210x295/575352/ffffff/?text=TV' alt='Poster'</img><p class='show-title'>${item.show.name}</p></li>`;
     }
   }
   addClickListeners();
@@ -69,7 +69,7 @@ function getTvShowObject(id) {
   return tvShowsList.find(tvShow => tvShow.show.id === parseInt(id));
 }
 
-//7 Función que guarda favoritos al hacer click.
+//7 Función que guarda favoritos al hacer click como un objeto.
 
 function saveFavourites(evt) {
   const id = evt.currentTarget.id;
@@ -91,13 +91,36 @@ function renderFavourites(favouritesArr) {
   favElem.innerHTML = '';
   for (let favouriteItem of favouritesArr) {
     if (favouriteItem.show.image !== null) {
-      favElem.innerHTML += `<li id=${favouriteItem.show.id}><img src='${favouriteItem.show.image.medium}' alt='Poster'</img><p>${favouriteItem.show.name}</p><button type="button">Borrar</button></li>`;
+      favElem.innerHTML += `<li class='fav-list_item' id='${favouriteItem.show.id}'><img src='${favouriteItem.show.image.medium}' alt='Poster'</img><p>${favouriteItem.show.name}</p><span class='close'>&times;</span></li>`;
     } else {
-      favElem.innerHTML += `<li id=${favouriteItem.show.id}><img src='https://via.placeholder.com/210x295/ffffff/666666/?text=TV' alt='Poster'</img><p>${favouriteItem.show.name}</p><button type="button">Borrar</button></li>`;
+      favElem.innerHTML += `<li class='fav-list_item' id='${favouriteItem.show.id}'><img src='https://via.placeholder.com/210x295/575352/ffffff/?text=TV' alt='Poster'</img><p>${favouriteItem.show.name}</p><span class='close'>&times;</span></li>`;
     }
+    addRemoveFavouriteListeners();
   }
+}
+//9.Añadimos botón close para poder eliminar nuestros favoritos.
+function addRemoveFavouriteListeners() {
+  const closeButtons = document.getElementsByClassName('close');
+  for (let closeButton of closeButtons) {
+    closeButton.addEventListener('click', deleteFavourite);
+  }
+}
+
+//10.Close functions / To delete favourites
+function deleteFavourite(evt) {
+  const favouriteId = evt.currentTarget.parentElement.id;
+
+  const favouriteObject = getTvShowObject(favouriteId);
+
+  const favouriteIndex = localStorageFavourites.indexOf(favouriteObject);
+
+  localStorageFavourites.splice(favouriteIndex, 1);
+
+  setLocalStorage(localStorageFavourites);
+  renderFavourites(localStorageFavourites);
 }
 
 searchButton.addEventListener('click', conectToApi);
 window.addEventListener('load', renderFavourites(localStorageFavourites));
+
 //# sourceMappingURL=main.js.map
