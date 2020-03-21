@@ -5,6 +5,7 @@ const ulElem = document.querySelector('.tvShows-list');
 const favElem = document.querySelector('#favouritesList');
 const inputValue = document.querySelector('.searchInput');
 const searchButton = document.querySelector('.buttonSearch');
+const deleteButton = document.querySelector('.delete-all_button');
 
 let tvShowsList = [];
 const localStorageFavourites = readLocalStorage();
@@ -92,7 +93,7 @@ function tvShowSelectedStyle(id) {
   const liSelected = document.getElementById(id);
   liSelected.classList.add('tvShowSelected');
 
- /*  const starred = document.getElementById('star');
+  /*  const starred = document.getElementById('star');
   starred.classList.add('starred'); */
 }
 //7.c Función que nos quita el estilo al tvShow
@@ -123,7 +124,7 @@ function addRemoveFavouriteListeners() {
   }
 }
 
-//10.Close functions / To delete favourites.Llamamos al elemento padre del close y volvemos a declarar el objeto para localizar su id y por ende su index.
+//10.Delete favorito / To delete favourites.Llamamos al elemento padre del close y volvemos a declarar el objeto para localizar su id y por ende su index.
 function deleteFavourite(evt) {
   const favouriteId = evt.currentTarget.parentElement.id;
 
@@ -138,7 +139,14 @@ function deleteFavourite(evt) {
   renderFavourites(localStorageFavourites);
 }
 
+//11.Delete all favourites.
+
+function deleteAllFavourites() {
+  favElem.innerHTML = '';
+}
+
 searchButton.addEventListener('click', conectToApi);
 window.addEventListener('load', renderFavourites(localStorageFavourites));
+deleteButton.addEventListener('click', deleteAllFavourites);
 
 //# sourceMappingURL=main.js.map
