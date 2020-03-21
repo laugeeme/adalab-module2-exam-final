@@ -30,7 +30,7 @@ function printTvShows(tvShowsArr) {
     if (item.show.image !== null) {
       ulElem.innerHTML += `<li id='${item.show.id}' class='tvShow-list_item'><div class="starred" id='starred'></div><img src='${item.show.image.medium}' alt='Poster'</img><p class='show-title'>${item.show.name}</p></li>`;
     } else {
-      ulElem.innerHTML += `<li id='${item.show.id}' class='tvShow-list_item'><div class="starred" id='starred'><img src='https://via.placeholder.com/210x295/575352/ffffff/?text=TV' alt='Poster'</img><p class='show-title'>${item.show.name}</p></li>`;
+      ulElem.innerHTML += `<li id='${item.show.id}' class='tvShow-list_item'><div class="starred" id='starred'></div><img src='https://via.placeholder.com/210x295/575352/ffffff/?text=TV' alt='Poster'</img><p class='show-title'>${item.show.name}</p></li>`;
     }
   }
   addClickListeners();
