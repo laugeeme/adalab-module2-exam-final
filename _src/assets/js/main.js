@@ -109,9 +109,9 @@ function renderFavourites(favouritesArr) {
   favElem.innerHTML = '';
   for (let favouriteItem of favouritesArr) {
     if (favouriteItem.show.image !== null) {
-      favElem.innerHTML += `<li class='fav-list_item' id='${favouriteItem.show.id}'><img src='${favouriteItem.show.image.medium}' alt='Poster'</img><p>${favouriteItem.show.name}</p><span class='close'>&times;</span></li>`;
+      favElem.innerHTML += `<li class='fav-list_item' id='${favouriteItem.show.id}'><img src='${favouriteItem.show.image.medium}' alt='Poster'</img><p>${favouriteItem.show.name}<span class='close'> &times;</span></p></li>`;
     } else {
-      favElem.innerHTML += `<li class='fav-list_item' id='${favouriteItem.show.id}'><img src='https://via.placeholder.com/210x295/575352/ffffff/?text=TV' alt='Poster'</img><p>${favouriteItem.show.name}</p><span class='close'>&times;</span></li>`;
+      favElem.innerHTML += `<li class='fav-list_item' id='${favouriteItem.show.id}'><img src='https://via.placeholder.com/210x295/575352/ffffff/?text=TV' alt='Poster'</img><p>${favouriteItem.show.name}<span class='close'> &times;</span></p></li>`;
     }
     addRemoveFavouriteListeners();
   }
@@ -126,8 +126,7 @@ function addRemoveFavouriteListeners() {
 
 //10.Delete favorito / To delete favourites.Llamamos al elemento padre del close y volvemos a declarar el objeto para localizar su id y por ende su index.
 function deleteFavourite(evt) {
-  const favouriteId = evt.currentTarget.parentElement.id;
-
+  const favouriteId = evt.currentTarget.parentElement.parentElement.id;
   const favouriteObject = getTvShowObject(favouriteId);
 
   const favouriteIndex = localStorageFavourites.indexOf(favouriteObject);
@@ -143,6 +142,7 @@ function deleteFavourite(evt) {
 
 function deleteAllFavourites() {
   favElem.innerHTML = '';
+  setLocalStorage([]);
 }
 
 searchButton.addEventListener('click', conectToApi);
