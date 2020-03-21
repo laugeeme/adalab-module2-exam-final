@@ -80,10 +80,22 @@ function saveFavourites(evt) {
     localStorageFavourites.push(favoriteObject);
     setLocalStorage(localStorageFavourites);
     renderFavourites(localStorageFavourites);
+    tvShowSelectedStyle (id);
   } else {
     alert('Ya has añadido esta serie a favoritos');
-  }
+  }tvShowSelectedStyle
 }
+
+
+//7.b Función que nos da estilo al tvShow seleccionado
+
+function tvShowSelectedStyle (id){
+  const liSelected =  document.getElementById(id);
+  liSelected.classList.add('tvShowSelected');
+}
+
+
+
 
 //8.Función que nos pinta el contenido de favoritos.
 
@@ -106,7 +118,7 @@ function addRemoveFavouriteListeners() {
   }
 }
 
-//10.Close functions / To delete favourites
+//10.Close functions / To delete favourites.Llamamos al elemento padre del close y volvemos a declarar el objeto para localizar su id y por ende su index.
 function deleteFavourite(evt) {
   const favouriteId = evt.currentTarget.parentElement.id;
 

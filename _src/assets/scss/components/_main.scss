@@ -5,7 +5,8 @@
   flex-wrap: wrap;
 
   & ul li{
-      margin: 30px;
+      margin: 20px;
+      cursor: pointer;
   }
 
 }
@@ -15,8 +16,8 @@
     display: flex;
     flex-wrap: wrap;
     max-width: 90vw;
-    margin: auto;
-    justify-content: center;
+    justify-content: space-around;
+    
 }
 
 
@@ -28,4 +29,20 @@
   color: whitesmoke;
   font-size: 20px;
   text-shadow: rgb(90, 87, 87) 2px 2px;
+  max-width: 200px;
+  
+  
+}
+
+
+.tvShowSelected{
+  background-color: white;
+  padding:10px;
+  
+    & p {
+      color: red;
+      text-shadow: none;
+      font-weight: 600;
+      
+}
 }

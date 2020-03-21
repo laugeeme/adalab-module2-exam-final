@@ -243,7 +243,8 @@ sup {
 }
 
 .main-container ul li {
-  margin: 30px;
+  margin: 20px;
+  cursor: pointer;
 }
 
 .tvShows-list {
@@ -254,10 +255,8 @@ sup {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   max-width: 90vw;
-  margin: auto;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
 }
 
 .show-title {
@@ -266,6 +265,18 @@ sup {
   color: whitesmoke;
   font-size: 20px;
   text-shadow: #5a5757 2px 2px;
+  max-width: 200px;
+}
+
+.tvShowSelected {
+  background-color: white;
+  padding: 10px;
+}
+
+.tvShowSelected p {
+  color: red;
+  text-shadow: none;
+  font-weight: 600;
 }
 
 .page__aside {
