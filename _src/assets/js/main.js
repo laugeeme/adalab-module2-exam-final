@@ -73,6 +73,7 @@ function getTvShowObject(id) {
 //7 Función que guarda favoritos al hacer click como un objeto.
 
 function saveFavourites(evt) {
+  
   const id = evt.currentTarget.id;
 
   const favoriteObject = getTvShowObject(id);
@@ -124,7 +125,7 @@ function addRemoveFavouriteListeners() {
   }
 }
 
-//10.Delete favorito / To delete favourites.Llamamos al elemento padre del close y volvemos a declarar el objeto para localizar su id y por ende su index.
+//10.Delete favorito /Llamamos al elemento padre del close y volvemos a declarar el objeto para localizar su id y por ende su index.
 function deleteFavourite(evt) {
   const favouriteId = evt.currentTarget.parentElement.parentElement.id;
   const favouriteObject = getTvShowObject(favouriteId);
@@ -141,9 +142,20 @@ function deleteFavourite(evt) {
 //11.Delete all favourites.
 
 function deleteAllFavourites() {
+
+  const allStyledFavourites = document.querySelectorAll('.tvShowSelected');
+ 
+  for (let styleFavourite of allStyledFavourites){
+    tvShowRemoveSelectedStyle(styleFavourite.id);
+  }
+
   favElem.innerHTML = '';
   setLocalStorage([]);
+  readLocalStorage();
+  
 }
+
+
 
 searchButton.addEventListener('click', conectToApi);
 window.addEventListener('load', renderFavourites(localStorageFavourites));

@@ -3,10 +3,12 @@
   text-align: center;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
 
   & ul li {
       margin: 20px;
       cursor: pointer;
+      text-align: center;
 
       & p {
         margin: auto;
