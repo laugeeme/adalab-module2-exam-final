@@ -28,9 +28,9 @@ function conectToApi() {
 function printTvShows(tvShowsArr) {
   for (let item of tvShowsArr) {
     if (item.show.image !== null) {
-      ulElem.innerHTML += `<li id='${item.show.id}' class='tvShow-list_item'><img src='${item.show.image.medium}' alt='Poster'</img><p class='show-title'>${item.show.name}</p></li>`;
+      ulElem.innerHTML += `<li id='${item.show.id}' class='tvShow-list_item'><div class="starred" id='starred'></div><img src='${item.show.image.medium}' alt='Poster'</img><p class='show-title'>${item.show.name}</p></li>`;
     } else {
-      ulElem.innerHTML += `<li id='${item.show.id}' class='tvShow-list_item'><img src='https://via.placeholder.com/210x295/575352/ffffff/?text=TV' alt='Poster'</img><p class='show-title'>${item.show.name}</p></li>`;
+      ulElem.innerHTML += `<li id='${item.show.id}' class='tvShow-list_item'><div class="starred" id='starred'><img src='https://via.placeholder.com/210x295/575352/ffffff/?text=TV' alt='Poster'</img><p class='show-title'>${item.show.name}</p></li>`;
     }
   }
   addClickListeners();
@@ -80,22 +80,27 @@ function saveFavourites(evt) {
     localStorageFavourites.push(favoriteObject);
     setLocalStorage(localStorageFavourites);
     renderFavourites(localStorageFavourites);
-    tvShowSelectedStyle (id);
+    tvShowSelectedStyle(id);
   } else {
     alert('Ya has añadido esta serie a favoritos');
-  }tvShowSelectedStyle
+  }
 }
-
 
 //7.b Función que nos da estilo al tvShow seleccionado
 
-function tvShowSelectedStyle (id){
-  const liSelected =  document.getElementById(id);
+function tvShowSelectedStyle(id) {
+  const liSelected = document.getElementById(id);
   liSelected.classList.add('tvShowSelected');
+
+ /*  const starred = document.getElementById('star');
+  starred.classList.add('starred'); */
 }
+//7.c Función que nos quita el estilo al tvShow
 
-
-
+function tvShowRemoveSelectedStyle(id) {
+  const liSelected = document.getElementById(id);
+  liSelected.classList.remove('tvShowSelected');
+}
 
 //8.Función que nos pinta el contenido de favoritos.
 
@@ -128,6 +133,7 @@ function deleteFavourite(evt) {
 
   localStorageFavourites.splice(favouriteIndex, 1);
 
+  tvShowRemoveSelectedStyle(favouriteId);
   setLocalStorage(localStorageFavourites);
   renderFavourites(localStorageFavourites);
 }

@@ -247,6 +247,10 @@ sup {
   cursor: pointer;
 }
 
+.main-container ul li p {
+  margin: auto;
+}
+
 .tvShows-list {
   list-style: none;
   display: -webkit-box;
@@ -265,10 +269,24 @@ sup {
   color: whitesmoke;
   font-size: 20px;
   text-shadow: #5a5757 2px 2px;
-  max-width: 200px;
-}
-
-.tvShowSelected {
+  width: 150px;
+  height: 50px;
+}/* .star {
+  color: yellow;
+  display: inline-block;
+	font-size: 30px;
+  text-shadow: 0 0 10px #222,1px 1px  0 #450505;
+  position: absolute;
+  content:"\2606";
+	
+} */.starred {
+  color: yellow;
+  display: inline-block;
+  font-size: 30px;
+  text-shadow: 0 0 10px #222,1px 1px  0 #450505;
+  position: absolute;
+  content: "\2605";
+}/* <span class="starred">&#9733;</span> */.tvShowSelected {
   background-color: white;
   padding: 10px;
 }
