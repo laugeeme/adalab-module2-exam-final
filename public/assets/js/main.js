@@ -84,7 +84,8 @@ function saveFavourites(evt) {
     renderFavourites(localStorageFavourites);
     tvShowSelectedStyle(id);
   } else {
-    alert('Ya has añadido esta serie a favoritos');
+    // eslint-disable-next-line no-undef
+    swal('Hey!', 'Ya has añadido esta serie a favoritos', 'warning');
   }
 }
 
