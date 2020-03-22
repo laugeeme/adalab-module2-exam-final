@@ -226,10 +226,11 @@ sup {
 
 .main-title {
   text-align: center;
-  font-family: 'Roboto';
-  color: whitesmoke;
+  font-family: 'Sen', sans-serif;
+  color: #15202B;
   font-size: 50px;
   text-shadow: #5a5757 2px 2px;
+  background-color: whitesmoke;
 }
 
 .main-container {
@@ -268,7 +269,7 @@ sup {
 
 .show-title {
   text-align: center;
-  font-family: 'Roboto';
+  font-family: 'Sen', sans-serif;
   color: whitesmoke;
   font-size: 20px;
   text-shadow: #5a5757 2px 2px;
@@ -302,11 +303,11 @@ sup {
 
 .page__aside {
   position: fixed;
-  width: 440px;
+  width: 370px;
   height: 100vh;
   left: 0;
-  top: 90px;
-  background: white;
+  top: 120px;
+  background: whitesmoke;
   border-radius: 5px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -315,26 +316,31 @@ sup {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  padding-bottom: 100px;
+  padding-bottom: 140px;
+}
+
+.page__aside .search-container {
+  padding-bottom: 15px;
 }
 
 .page__aside .search-container .searchInput {
-  width: 300px;
-  height: 50px;
+  width: 250px;
+  height: 35px;
   padding: 10px;
   margin-left: 15px;
   margin-top: 20px;
   border: 2px solid grey;
-  font-family: 'Roboto';
+  font-family: 'Sen', sans-serif;
   background-color: white;
   border-radius: 5px;
+  font-size: 18px;
 }
 
 .page__aside .search-container .buttonSearch {
-  width: 100px;
-  height: 40px;
+  width: 80px;
+  height: 35px;
   font-size: 20px;
-  font-family: 'Roboto';
+  font-family: 'Sen', sans-serif;
   border-radius: 5px;
   background-color: grey;
   color: white;
@@ -350,11 +356,11 @@ sup {
   list-style-type: none;
   text-align: center;
   display: inline-block;
-  margin-left: 100px;
+  margin-left: 60px;
 }
 
 .page__aside .favourites-container .favourites li p {
-  font-family: 'Roboto';
+  font-family: 'Sen', sans-serif;
   font-size: 24px;
   width: 150px;
   height: 50px;
@@ -375,14 +381,14 @@ sup {
   -ms-flex-align: baseline;
   align-items: baseline;
   text-align: center;
-  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .page__aside .favourites-container .delete-all_container .delete-all_button {
   width: 160px;
   height: 35px;
   font-size: 16px;
-  font-family: 'Roboto';
+  font-family: 'Sen', sans-serif;
   border-radius: 5px;
   color: white;
   background-color: #15202b;
