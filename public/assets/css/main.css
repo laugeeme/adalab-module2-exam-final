@@ -229,7 +229,7 @@ sup {
   font-family: "Sen", sans-serif;
   color: #15202b;
   font-size: 50px;
-  text-shadow: #5a5757 2px 2px;
+  text-shadow: #aaa5a5 4px 2px;
   background-color: whitesmoke;
 }
 
@@ -271,7 +271,7 @@ sup {
   text-align: center;
   font-family: "Sen", sans-serif;
   color: whitesmoke;
-  font-size: 18px;
+  font-size: 20px;
   text-shadow: #5a5757 2px 2px;
   width: 150px;
   height: 50px;
@@ -370,7 +370,7 @@ sup {
 .page__aside .favourites-container .favourites li p {
   font-family: "Sen", sans-serif;
   font-size: 18px;
-  width: 160px;
+  width: 170px;
   height: 50px;
   margin: auto;
 }
