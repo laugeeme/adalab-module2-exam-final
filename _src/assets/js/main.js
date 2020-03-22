@@ -24,14 +24,21 @@ function conectToApi() {
     });
 }
 
+function conectToApiIfEnter(evt) {
+  event.preventDefault();
+  if (evt.keyCode === 13) {
+    conectToApi();
+  }
+}
+
 //2.Función pintar los resultados de la búsqueda (añadimos ID para comprobar luego que no la tenemos si ya la hemos añadido a favoritos)
 
 function printTvShows(tvShowsArr) {
   for (let item of tvShowsArr) {
     if (item.show.image !== null) {
-      ulElem.innerHTML += `<li id='${item.show.id}' class='tvShow-list_item'><div class="starred" id='starred'></div><img src='${item.show.image.medium}' alt='Poster'</img><p class='show-title'>${item.show.name}</p></li>`;
+      ulElem.innerHTML += `<li id='${item.show.id}' class='tvShow-list_item'></div><img src='${item.show.image.medium}' alt='Poster'</img><p class='show-title'>${item.show.name}</p></li>`;
     } else {
-      ulElem.innerHTML += `<li id='${item.show.id}' class='tvShow-list_item'><div class="starred" id='starred'></div><img src='https://via.placeholder.com/210x295/575352/ffffff/?text=TV' alt='Poster'</img><p class='show-title'>${item.show.name}</p></li>`;
+      ulElem.innerHTML += `<li id='${item.show.id}' class='tvShow-list_item'></div><img src='https://via.placeholder.com/210x295/575352/ffffff/?text=TV' alt='Poster'</img><p class='show-title'>${item.show.name}</p></li>`;
     }
   }
   addClickListeners();
@@ -43,7 +50,7 @@ function addClickListeners() {
   const tvShowLiElements = document.querySelectorAll('.tvShow-list_item');
 
   for (let tvShowLi of tvShowLiElements) {
-    tvShowLi.addEventListener('click', saveFavourites);
+    tvShowLi.addEventListener('click', saveAndDeleteFavourites);
   }
 }
 
@@ -70,39 +77,29 @@ function getTvShowObject(id) {
   return tvShowsList.find(tvShow => tvShow.show.id === parseInt(id));
 }
 
-//7 Función que guarda favoritos al hacer click como un objeto.
+//7 Función que guarda y borra favoritos al hacer click como un objeto.
 
-function saveFavourites(evt) {
-  
+function saveAndDeleteFavourites(evt) {
   const id = evt.currentTarget.id;
-
   const favoriteObject = getTvShowObject(id);
+  let favouriteIndex = localStorageFavourites.indexOf(favoriteObject);
 
-  if (localStorageFavourites.indexOf(favoriteObject) === -1) {
+  if (favouriteIndex === -1) {
     localStorageFavourites.push(favoriteObject);
-    setLocalStorage(localStorageFavourites);
-    renderFavourites(localStorageFavourites);
     tvShowSelectedStyle(id);
   } else {
-    // eslint-disable-next-line no-undef
-    swal('Hey!', 'Ya has añadido esta serie a favoritos', 'warning');
+    deleteFavouriteById(id);
   }
+
+  setLocalStorage(localStorageFavourites);
+  renderFavourites(localStorageFavourites);
 }
 
-//7.b Función que nos da estilo al tvShow seleccionado
+//7.b Función que nos da estilo o no al tvShow seleccionado
 
 function tvShowSelectedStyle(id) {
   const liSelected = document.getElementById(id);
-  liSelected.classList.add('tvShowSelected');
-
-  /*  const starred = document.getElementById('star');
-  starred.classList.add('starred'); */
-}
-//7.c Función que nos quita el estilo al tvShow
-
-function tvShowRemoveSelectedStyle(id) {
-  const liSelected = document.getElementById(id);
-  liSelected.classList.remove('tvShowSelected');
+  liSelected.classList.toggle('tvShowSelected');
 }
 
 //8.Función que nos pinta el contenido de favoritos.
@@ -118,24 +115,26 @@ function renderFavourites(favouritesArr) {
     addRemoveFavouriteListeners();
   }
 }
-//9.Añadimos botón close para poder eliminar nuestros favoritos.
+//9.Añadimos botón close para poder eliminar nuestros favoritos del aside.
 function addRemoveFavouriteListeners() {
   const closeButtons = document.getElementsByClassName('close');
   for (let closeButton of closeButtons) {
-    closeButton.addEventListener('click', deleteFavourite);
+    closeButton.addEventListener('click', deleteFavouriteAside);
   }
 }
 
 //10.Delete favorito /Llamamos al elemento padre del close y volvemos a declarar el objeto para localizar su id y por ende su index.
-function deleteFavourite(evt) {
+function deleteFavouriteAside(evt) {
   const favouriteId = evt.currentTarget.parentElement.parentElement.id;
-  const favouriteObject = getTvShowObject(favouriteId);
+  deleteFavouriteById(favouriteId);
+}
 
+function deleteFavouriteById(id) {
+  const favouriteObject = getTvShowObject(id);
   const favouriteIndex = localStorageFavourites.indexOf(favouriteObject);
-
   localStorageFavourites.splice(favouriteIndex, 1);
 
-  tvShowRemoveSelectedStyle(favouriteId);
+  tvShowSelectedStyle(id);
   setLocalStorage(localStorageFavourites);
   renderFavourites(localStorageFavourites);
 }
@@ -143,21 +142,19 @@ function deleteFavourite(evt) {
 //11.Delete all favourites.
 
 function deleteAllFavourites() {
-
   const allStyledFavourites = document.querySelectorAll('.tvShowSelected');
- 
-  for (let styleFavourite of allStyledFavourites){
-    tvShowRemoveSelectedStyle(styleFavourite.id);
+
+  for (let styleFavourite of allStyledFavourites) {
+    tvShowSelectedStyle(styleFavourite.id);
   }
 
   favElem.innerHTML = '';
   setLocalStorage([]);
   readLocalStorage();
-  
 }
 
-
-
 searchButton.addEventListener('click', conectToApi);
+searchButton.addEventListener('keyup', conectToApiIfEnter);
+
 window.addEventListener('load', renderFavourites(localStorageFavourites));
 deleteButton.addEventListener('click', deleteAllFavourites);

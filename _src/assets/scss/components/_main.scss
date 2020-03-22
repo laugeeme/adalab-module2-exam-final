@@ -1,45 +1,37 @@
 .main-container {
-  margin-left: 430px;
+  margin-left: 380px;
   text-align: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 
   & ul li {
-      margin: 20px;
-      cursor: pointer;
-      text-align: center;
+    margin: 20px;
+    cursor: pointer;
+    text-align: center;
 
-      & p {
-        margin: auto;
-        
-      }
+    & p {
+      margin: auto;
+    }
   }
-
 }
 
-.tvShows-list{
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 90vw;
-    justify-content: space-around;
-    
+.tvShows-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 90vw;
+  justify-content: space-around;
 }
-
-
-
 
 .show-title {
   text-align: center;
-  font-family: 'Sen', sans-serif;
-  color: whitesmoke;
+  font-family: $mainFont;
+  color: $secondBackColor;
   font-size: 20px;
   text-shadow: rgb(90, 87, 87) 2px 2px;
   width: 150px;
   height: 50px;
-  
-  
 }
 
 /* .star {
@@ -52,7 +44,7 @@
 	
 } */
 
-.starred {
+/* .starred {
   color: yellow;
   display: inline-block;
 	font-size: 30px;
@@ -60,18 +52,16 @@
   position: absolute;
   content: "\2605";
 
-}
+} */
 /* <span class="starred">&#9733;</span> */
 
-
-.tvShowSelected{
+.tvShowSelected {
   background-color: white;
-  padding:10px;
-  
-    & p {
-      color: red;
-      text-shadow: none;
-      font-weight: 600;
-      
-}
+  padding: 10px;
+
+  & p {
+    color: red;
+    text-shadow: none;
+    font-weight: 600;
+  }
 }
