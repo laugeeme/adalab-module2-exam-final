@@ -108,7 +108,6 @@ function saveAndDeleteFavourites(evt) {
   let favouriteIndex = obtainIndexOfLocalStorageFavouritesById(id);
 
   if (favouriteIndex === -1) {
-    console.log('hola');
     localStorageFavourites.push(favoriteObject);
     tvShowSelectedStyle(id);
   } else {
@@ -170,7 +169,7 @@ function addRemoveFavouriteListeners() {
 
 //11.Functions to delete favourite from aside. We call to parentElement from CLOSE and we declare the object to looking for the ID and their INDEX.
 function deleteFavouriteAside(evt) {
-  const favouriteId = evt.currentTarget.parentElement.id;
+  const favouriteId = evt.currentTarget.parentElement.parentElement.id;
   deleteFavouriteById(favouriteId);
 }
 

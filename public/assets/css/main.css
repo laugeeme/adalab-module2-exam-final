@@ -348,6 +348,13 @@ sup {
   cursor: pointer;
 }
 
+.page__aside .search-container .buttonSearch:hover {
+  -webkit-box-shadow: 0 4px 16px #032735;
+  box-shadow: 0 4px 16px #032735;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
 .page__aside .favourites-container {
   overflow-y: scroll;
 }
@@ -394,6 +401,13 @@ sup {
   color: white;
   background-color: #15202b;
   cursor: pointer;
+}
+
+.page__aside .favourites-container .delete-all_container .delete-all_button:hover {
+  -webkit-box-shadow: 0 4px 16px #032735;
+  box-shadow: 0 4px 16px #032735;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 /*# sourceMappingURL=main.css.map */
