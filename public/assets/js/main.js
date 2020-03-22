@@ -25,7 +25,6 @@ function conectToApi() {
 }
 
 function conectToApiIfEnter(evt) {
-  event.preventDefault();
   if (evt.keyCode === 13) {
     conectToApi();
   }
@@ -35,13 +34,47 @@ function conectToApiIfEnter(evt) {
 
 function printTvShows(tvShowsArr) {
   for (let item of tvShowsArr) {
+    const liElem = document.createElement('li');
+    const imgElem = document.createElement('img');
+    const pElem = document.createElement('p');
+    liElem.appendChild(imgElem);
+    liElem.appendChild(pElem);
+    liElem.setAttribute('id', item.show.id);
+    liElem.setAttribute('class', 'tvShow-list_item');
+    imgElem.setAttribute('alt', 'Poster');
+    pElem.setAttribute('class', 'show-title');
+    let pContent = document.createTextNode(item.show.name);
+    pElem.appendChild(pContent);
+    ulElem.appendChild(liElem);
+
+
+
     if (item.show.image !== null) {
-      ulElem.innerHTML += `<li id='${item.show.id}' class='tvShow-list_item'></div><img src='${item.show.image.medium}' alt='Poster'</img><p class='show-title'>${item.show.name}</p></li>`;
+      imgElem.setAttribute('src', item.show.image.medium);
+    
     } else {
-      ulElem.innerHTML += `<li id='${item.show.id}' class='tvShow-list_item'></div><img src='https://via.placeholder.com/210x295/575352/ffffff/?text=TV' alt='Poster'</img><p class='show-title'>${item.show.name}</p></li>`;
+      imgElem.setAttribute(
+        'src',
+        'https://via.placeholder.com/210x295/575352/ffffff/?text=TV'
+      );
     }
+
+    if(isFavourited(item.show.id)){
+      liElem.setAttribute('class', 'tvShow-list_item tvShowSelected');
+    }
+
+
   }
   addClickListeners();
+}
+
+function isFavourited(id){
+  for(let localFavourite of localStorageFavourites){
+    if(id === localFavourite.show.id){
+      return true;
+    }
+  }
+  return false;
 }
 
 //3.Función para añadir listener a los li para guardar en favoritos. La ejecutamos donde pinta las películas, es decir en el paso 2.
@@ -108,9 +141,9 @@ function renderFavourites(favouritesArr) {
   favElem.innerHTML = '';
   for (let favouriteItem of favouritesArr) {
     if (favouriteItem.show.image !== null) {
-      favElem.innerHTML += `<li class='fav-list_item' id='${favouriteItem.show.id}'><img src='${favouriteItem.show.image.medium}' alt='Poster'</img><p>${favouriteItem.show.name}<span class='close'> &times;</span></p></li>`;
+      favElem.innerHTML += `<li class='fav-list_item' id='${favouriteItem.show.id}'><img src='${favouriteItem.show.image.medium}' alt='Poster'></img><p>${favouriteItem.show.name}<span class='close'> &times;</span></p></li>`;
     } else {
-      favElem.innerHTML += `<li class='fav-list_item' id='${favouriteItem.show.id}'><img src='https://via.placeholder.com/210x295/575352/ffffff/?text=TV' alt='Poster'</img><p>${favouriteItem.show.name}<span class='close'> &times;</span></p></li>`;
+      favElem.innerHTML += `<li class='fav-list_item' id='${favouriteItem.show.id}'><img src='https://via.placeholder.com/210x295/575352/ffffff/?text=TV' alt='Poster'></img><p>${favouriteItem.show.name}<span class='close'> &times;</span></p></li>`;
     }
     addRemoveFavouriteListeners();
   }
@@ -154,8 +187,7 @@ function deleteAllFavourites() {
 }
 
 searchButton.addEventListener('click', conectToApi);
-searchButton.addEventListener('keyup', conectToApiIfEnter);
-
+window.addEventListener('keyup', conectToApiIfEnter);
 window.addEventListener('load', renderFavourites(localStorageFavourites));
 deleteButton.addEventListener('click', deleteAllFavourites);
 
