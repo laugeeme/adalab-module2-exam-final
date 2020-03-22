@@ -8,10 +8,9 @@ const searchButton = document.querySelector('.buttonSearch');
 const deleteButton = document.querySelector('.delete-all_button');
 
 let tvShowsList = [];
-const localStorageFavourites = readLocalStorage();
+let localStorageFavourites = readLocalStorage();
 
 //1.Function to conect to Api.
-
 function conectToApi() {
   const inputName = inputValue.value;
   ulElem.innerHTML = '';
@@ -31,20 +30,22 @@ function conectToApiIfEnter(evt) {
 }
 
 //2.Function to print results from search (add ID to compare if we don't have in favourites).
-
 function printTvShows(tvShowsArr) {
   for (let item of tvShowsArr) {
     const liElem = document.createElement('li');
-    const imgElem = document.createElement('img');
-    const pElem = document.createElement('p');
-    liElem.appendChild(imgElem);
-    liElem.appendChild(pElem);
     liElem.setAttribute('id', item.show.id);
     liElem.setAttribute('class', 'tvShow-list_item');
+
+    const imgElem = document.createElement('img');
     imgElem.setAttribute('alt', 'Poster');
+
+    const pElem = document.createElement('p');
     pElem.setAttribute('class', 'show-title');
     let pContent = document.createTextNode(item.show.name);
+
     pElem.appendChild(pContent);
+    liElem.appendChild(imgElem);
+    liElem.appendChild(pElem);
     ulElem.appendChild(liElem);
 
     if (item.show.image !== null) {
@@ -56,24 +57,23 @@ function printTvShows(tvShowsArr) {
       );
     }
 
-    if (isFavourited(item.show.id)) {
-      liElem.setAttribute('class', 'tvShow-list_item tvShowSelected');   //add class to show favoritedstyle in every search if favorited
+    if (obtainIndexOfLocalStorageFavouritesById(item.show.id) !== -1) {
+      liElem.setAttribute('class', 'tvShow-list_item tvShowSelected'); //add class to show favoritedstyle in every search if favorited
     }
   }
   addClickListeners();
 }
 
-function isFavourited(id) {
-  for (let localFavourite of localStorageFavourites) {
-    if (id === localFavourite.show.id) {
-      return true;
+function obtainIndexOfLocalStorageFavouritesById(id) {
+  for (let i = 0; i < localStorageFavourites.length; i++) {
+    if (parseInt(id) === localStorageFavourites[i].show.id) {
+      return i;
     }
   }
-  return false;
+  return -1;
 }
 
 //3.Function to add listener to LI to save in favorites. Is ejecuted when the tvshows are printed.
-
 function addClickListeners() {
   const tvShowLiElements = document.querySelectorAll('.tvShow-list_item');
 
@@ -83,13 +83,11 @@ function addClickListeners() {
 }
 
 //4.Function to set the LocalStorage.
-
 function setLocalStorage(favouritesArray) {
   localStorage.setItem('tvShowInfo', JSON.stringify(favouritesArray));
 }
 
 //5.Function to take the LocalStorage value, read and parse the info.
-
 function readLocalStorage() {
   let localInfo = JSON.parse(localStorage.getItem('tvShowInfo'));
   if (localInfo !== null) {
@@ -99,19 +97,18 @@ function readLocalStorage() {
 }
 
 //6.Function that relates the favorite with is ID, read and brings back the objetc to use it.
-
 function getTvShowObject(id) {
   return tvShowsList.find(tvShow => tvShow.show.id === parseInt(id));
 }
 
 //7.Function that saves and delete favourites as an object when click.
-
 function saveAndDeleteFavourites(evt) {
   const id = evt.currentTarget.id;
   const favoriteObject = getTvShowObject(id);
-  let favouriteIndex = localStorageFavourites.indexOf(favoriteObject);
+  let favouriteIndex = obtainIndexOfLocalStorageFavouritesById(id);
 
   if (favouriteIndex === -1) {
+    console.log('hola');
     localStorageFavourites.push(favoriteObject);
     tvShowSelectedStyle(id);
   } else {
@@ -123,21 +120,42 @@ function saveAndDeleteFavourites(evt) {
 }
 
 //8.Function who gives or not style at the tvShow favorited.
-
 function tvShowSelectedStyle(id) {
   const liSelected = document.getElementById(id);
   liSelected.classList.toggle('tvShowSelected');
 }
 
 //9.Function for print favourites in aside content.
-
 function renderFavourites(favouritesArr) {
   favElem.innerHTML = '';
   for (let favouriteItem of favouritesArr) {
+    const liElem = document.createElement('li');
+    liElem.setAttribute('id', favouriteItem.show.id);
+    liElem.setAttribute('class', 'fav-list_item');
+
+    const imgElem = document.createElement('img');
+    imgElem.setAttribute('alt', 'Poster');
+
+    const pElem = document.createElement('p');
+    let pContent = document.createTextNode(favouriteItem.show.name);
+    pElem.appendChild(pContent);
+
+    const spanElem = document.createElement('span');
+    spanElem.setAttribute('class', 'close');
+    spanElem.innerHTML = ' &times;';
+
+    pElem.appendChild(spanElem);
+    liElem.appendChild(imgElem);
+    liElem.appendChild(pElem);
+    favElem.appendChild(liElem);
+
     if (favouriteItem.show.image !== null) {
-      favElem.innerHTML += `<li class='fav-list_item' id='${favouriteItem.show.id}'><img src='${favouriteItem.show.image.medium}' alt='Poster'></img><p>${favouriteItem.show.name}<span class='close'> &times;</span></p></li>`;
+      imgElem.setAttribute('src', favouriteItem.show.image.medium);
     } else {
-      favElem.innerHTML += `<li class='fav-list_item' id='${favouriteItem.show.id}'><img src='https://via.placeholder.com/210x295/575352/ffffff/?text=TV' alt='Poster'></img><p>${favouriteItem.show.name}<span class='close'> &times;</span></p></li>`;
+      imgElem.setAttribute(
+        'src',
+        'https://via.placeholder.com/210x295/575352/ffffff/?text=TV'
+      );
     }
     addRemoveFavouriteListeners();
   }
@@ -152,13 +170,12 @@ function addRemoveFavouriteListeners() {
 
 //11.Functions to delete favourite from aside. We call to parentElement from CLOSE and we declare the object to looking for the ID and their INDEX.
 function deleteFavouriteAside(evt) {
-  const favouriteId = evt.currentTarget.parentElement.parentElement.id;
+  const favouriteId = evt.currentTarget.parentElement.id;
   deleteFavouriteById(favouriteId);
 }
 
 function deleteFavouriteById(id) {
-  const favouriteObject = getTvShowObject(id);
-  const favouriteIndex = localStorageFavourites.indexOf(favouriteObject);
+  const favouriteIndex = obtainIndexOfLocalStorageFavouritesById(id);
   localStorageFavourites.splice(favouriteIndex, 1);
 
   tvShowSelectedStyle(id);
@@ -167,20 +184,17 @@ function deleteFavouriteById(id) {
 }
 
 //12.Function to delete all favourites at the same time.
-
 function deleteAllFavourites() {
-  const allStyledFavourites = document.querySelectorAll('.tvShowSelected');
-
-  for (let styleFavourite of allStyledFavourites) {
-    tvShowSelectedStyle(styleFavourite.id);
+  for (let localStorageFavourite of localStorageFavourites) {
+    tvShowSelectedStyle(localStorageFavourite.show.id);
   }
 
   favElem.innerHTML = '';
   setLocalStorage([]);
-  readLocalStorage();
+  localStorageFavourites = readLocalStorage();
 }
 
 searchButton.addEventListener('click', conectToApi);
-window.addEventListener('keyup', conectToApiIfEnter);
+document.addEventListener('keydown', conectToApiIfEnter);
 window.addEventListener('load', renderFavourites(localStorageFavourites));
 deleteButton.addEventListener('click', deleteAllFavourites);
