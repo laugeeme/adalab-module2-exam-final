@@ -10,7 +10,7 @@ const deleteButton = document.querySelector('.delete-all_button');
 let tvShowsList = [];
 const localStorageFavourites = readLocalStorage();
 
-//1.Función llamar a la Api
+//1.Function to conect to Api.
 
 function conectToApi() {
   const inputName = inputValue.value;
@@ -30,7 +30,7 @@ function conectToApiIfEnter(evt) {
   }
 }
 
-//2.Función pintar los resultados de la búsqueda (añadimos ID para comprobar luego que no la tenemos si ya la hemos añadido a favoritos)
+//2.Function to print results from search (add ID to compare if we don't have in favourites).
 
 function printTvShows(tvShowsArr) {
   for (let item of tvShowsArr) {
@@ -47,11 +47,8 @@ function printTvShows(tvShowsArr) {
     pElem.appendChild(pContent);
     ulElem.appendChild(liElem);
 
-
-
     if (item.show.image !== null) {
       imgElem.setAttribute('src', item.show.image.medium);
-    
     } else {
       imgElem.setAttribute(
         'src',
@@ -59,25 +56,23 @@ function printTvShows(tvShowsArr) {
       );
     }
 
-    if(isFavourited(item.show.id)){
-      liElem.setAttribute('class', 'tvShow-list_item tvShowSelected');
+    if (isFavourited(item.show.id)) {
+      liElem.setAttribute('class', 'tvShow-list_item tvShowSelected');   //add class to show favoritedstyle in every search if favorited
     }
-
-
   }
   addClickListeners();
 }
 
-function isFavourited(id){
-  for(let localFavourite of localStorageFavourites){
-    if(id === localFavourite.show.id){
+function isFavourited(id) {
+  for (let localFavourite of localStorageFavourites) {
+    if (id === localFavourite.show.id) {
       return true;
     }
   }
   return false;
 }
 
-//3.Función para añadir listener a los li para guardar en favoritos. La ejecutamos donde pinta las películas, es decir en el paso 2.
+//3.Function to add listener to LI to save in favorites. Is ejecuted when the tvshows are printed.
 
 function addClickListeners() {
   const tvShowLiElements = document.querySelectorAll('.tvShow-list_item');
@@ -87,14 +82,13 @@ function addClickListeners() {
   }
 }
 
-//4.Función que setea el LocalStorage.
+//4.Function to set the LocalStorage.
 
 function setLocalStorage(favouritesArray) {
   localStorage.setItem('tvShowInfo', JSON.stringify(favouritesArray));
-  // meter por cada indice su id y su valor, en local storage para que carguen con todas las busquedas
 }
 
-//5.Función que recoge el valor de LocalStorage, lee y parsea la info.
+//5.Function to take the LocalStorage value, read and parse the info.
 
 function readLocalStorage() {
   let localInfo = JSON.parse(localStorage.getItem('tvShowInfo'));
@@ -104,13 +98,13 @@ function readLocalStorage() {
   return [];
 }
 
-//6. Me quedo con el objeto para poder usarlo. Función que relaciona el favorito con su ID ,lo lee y devuelve el objeto para usarlo.
+//6.Function that relates the favorite with is ID, read and brings back the objetc to use it.
 
 function getTvShowObject(id) {
   return tvShowsList.find(tvShow => tvShow.show.id === parseInt(id));
 }
 
-//7 Función que guarda y borra favoritos al hacer click como un objeto.
+//7.Function that saves and delete favourites as an object when click.
 
 function saveAndDeleteFavourites(evt) {
   const id = evt.currentTarget.id;
@@ -128,14 +122,14 @@ function saveAndDeleteFavourites(evt) {
   renderFavourites(localStorageFavourites);
 }
 
-//7.b Función que nos da estilo o no al tvShow seleccionado
+//8.Function who gives or not style at the tvShow favorited.
 
 function tvShowSelectedStyle(id) {
   const liSelected = document.getElementById(id);
   liSelected.classList.toggle('tvShowSelected');
 }
 
-//8.Función que nos pinta el contenido de favoritos.
+//9.Function for print favourites in aside content.
 
 function renderFavourites(favouritesArr) {
   favElem.innerHTML = '';
@@ -148,7 +142,7 @@ function renderFavourites(favouritesArr) {
     addRemoveFavouriteListeners();
   }
 }
-//9.Añadimos botón close para poder eliminar nuestros favoritos del aside.
+//10.Add button CLOSE to delete favourites from aside content.
 function addRemoveFavouriteListeners() {
   const closeButtons = document.getElementsByClassName('close');
   for (let closeButton of closeButtons) {
@@ -156,7 +150,7 @@ function addRemoveFavouriteListeners() {
   }
 }
 
-//10.Delete favorito /Llamamos al elemento padre del close y volvemos a declarar el objeto para localizar su id y por ende su index.
+//11.Functions to delete favourite from aside. We call to parentElement from CLOSE and we declare the object to looking for the ID and their INDEX.
 function deleteFavouriteAside(evt) {
   const favouriteId = evt.currentTarget.parentElement.parentElement.id;
   deleteFavouriteById(favouriteId);
@@ -172,7 +166,7 @@ function deleteFavouriteById(id) {
   renderFavourites(localStorageFavourites);
 }
 
-//11.Delete all favourites.
+//12.Function to delete all favourites at the same time.
 
 function deleteAllFavourites() {
   const allStyledFavourites = document.querySelectorAll('.tvShowSelected');
