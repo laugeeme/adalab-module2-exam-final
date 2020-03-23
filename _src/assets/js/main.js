@@ -29,7 +29,7 @@ function conectToApiIfEnter(evt) {
   }
 }
 
-//2.Function to print results from search (add ID to compare if we don't have in favourites).
+//2.Function to print results from search (add item.show.id to compare if we don't have in favourites).
 function printTvShows(tvShowsArr) {
   for (let item of tvShowsArr) {
     const liElem = document.createElement('li');
@@ -64,6 +64,7 @@ function printTvShows(tvShowsArr) {
   addClickListeners();
 }
 
+//3.Function to obtain the index from localStorageFavourites by his ID
 function obtainIndexOfLocalStorageFavouritesById(id) {
   for (let i = 0; i < localStorageFavourites.length; i++) {
     if (parseInt(id) === localStorageFavourites[i].show.id) {
@@ -73,7 +74,7 @@ function obtainIndexOfLocalStorageFavouritesById(id) {
   return -1;
 }
 
-//3.Function to add listener to LI to save in favorites. Is ejecuted when the tvshows are printed.
+//4.Function to add listener to LI to save in favorites. Is ejecuted when the tvshows are printed.
 function addClickListeners() {
   const tvShowLiElements = document.querySelectorAll('.tvShow-list_item');
 
@@ -82,12 +83,12 @@ function addClickListeners() {
   }
 }
 
-//4.Function to set the LocalStorage.
+//5.Function to set the LocalStorage.
 function setLocalStorage(favouritesArray) {
   localStorage.setItem('tvShowInfo', JSON.stringify(favouritesArray));
 }
 
-//5.Function to take the LocalStorage value, read and parse the info.
+//6.Function to take the LocalStorage value, read and parse the info.
 function readLocalStorage() {
   let localInfo = JSON.parse(localStorage.getItem('tvShowInfo'));
   if (localInfo !== null) {
@@ -96,12 +97,12 @@ function readLocalStorage() {
   return [];
 }
 
-//6.Function that relates the favorite with is ID, read and brings back the objetc to use it.
+//7.Function that relates the favorite with is ID, read and brings back the objetc to use it.
 function getTvShowObject(id) {
   return tvShowsList.find(tvShow => tvShow.show.id === parseInt(id));
 }
 
-//7.Function that saves and delete favourites as an object when click.
+//8.Function that saves and delete favourites as an object when click.
 function saveAndDeleteFavourites(evt) {
   const id = evt.currentTarget.id;
   const favoriteObject = getTvShowObject(id);
@@ -118,13 +119,13 @@ function saveAndDeleteFavourites(evt) {
   renderFavourites(localStorageFavourites);
 }
 
-//8.Function who gives or not style at the tvShow favorited.
+//9.Function who gives or not style at the tvShow favorited.
 function tvShowSelectedStyle(id) {
   const liSelected = document.getElementById(id);
   liSelected.classList.toggle('tvShowSelected');
 }
 
-//9.Function for print favourites in aside content.
+//10.Function for print favourites in aside content.
 function renderFavourites(favouritesArr) {
   favElem.innerHTML = '';
   for (let favouriteItem of favouritesArr) {
@@ -159,7 +160,7 @@ function renderFavourites(favouritesArr) {
     addRemoveFavouriteListeners();
   }
 }
-//10.Add button CLOSE to delete favourites from aside content.
+//11.Add button CLOSE to delete favourites from aside content.
 function addRemoveFavouriteListeners() {
   const closeButtons = document.getElementsByClassName('close');
   for (let closeButton of closeButtons) {
@@ -167,7 +168,7 @@ function addRemoveFavouriteListeners() {
   }
 }
 
-//11.Functions to delete favourite from aside. We call to parentElement from CLOSE and we declare the object to looking for the ID and their INDEX.
+//12.Functions to delete favourite from aside. We call to parentElement from CLOSE and we declare the object to looking for the ID and their INDEX.
 function deleteFavouriteAside(evt) {
   const favouriteId = evt.currentTarget.parentElement.parentElement.id;
   deleteFavouriteById(favouriteId);
@@ -182,7 +183,7 @@ function deleteFavouriteById(id) {
   renderFavourites(localStorageFavourites);
 }
 
-//12.Function to delete all favourites at the same time.
+//13.Function to delete all favourites at the same time.
 function deleteAllFavourites() {
   for (let localStorageFavourite of localStorageFavourites) {
     tvShowSelectedStyle(localStorageFavourite.show.id);

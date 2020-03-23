@@ -227,13 +227,18 @@ sup {
 .main-title {
   text-align: center;
   font-family: "Sen", sans-serif;
-  color: #15202b;
-  font-size: 50px;
-  text-shadow: #aaa5a5 4px 2px;
-  background-color: whitesmoke;
-}
-
-.main-container {
+  text-transform: uppercase;
+  font-size: 60px;
+  background: url(../images/animated_text_fill3.png.svg) repeat-y;
+  -webkit-background-clip: text;
+  background-clip: text;
+ /* Animate Background Image */
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: aitf 80s linear infinite;
+ /* Activate hardware acceleration for smoother animations */
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+}/* Animate Background Image */.main-container {
   margin-left: 380px;
   text-align: center;
   display: -webkit-box;
@@ -275,23 +280,9 @@ sup {
   text-shadow: #5a5757 2px 2px;
   width: 150px;
   height: 50px;
-}/* .star {
-  color: yellow;
-  display: inline-block;
-	font-size: 30px;
-  text-shadow: 0 0 10px #222,1px 1px  0 #450505;
-  position: absolute;
-  content:"\2606";
-	
-} *//* .starred {
-  color: yellow;
-  display: inline-block;
-	font-size: 30px;
-  text-shadow: 0 0 10px #222,1px 1px  0 #450505;
-  position: absolute;
-  content: "\2605";
+}
 
-} *//* <span class="starred">&#9733;</span> */.tvShowSelected {
+.tvShowSelected {
   background-color: white;
   padding: 10px;
 }
@@ -410,6 +401,16 @@ sup {
   box-shadow: 0 4px 16px #032735;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
+}
+
+@-webkit-keyframes aitf {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

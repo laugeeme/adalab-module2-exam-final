@@ -35,8 +35,7 @@
       color: white;
       cursor: pointer;
 
-
-      &:hover{
+      &:hover {
         box-shadow: 0 4px 16px rgb(3, 39, 53);
         transition: all 0.2s ease;
       }
@@ -53,7 +52,6 @@
         text-align: center;
         display: inline-block;
         margin-left: 60px;
-        
 
         & p {
           font-family: $mainFont;
@@ -69,7 +67,6 @@
         opacity: 0.3;
         padding-left: 10px;
         padding-right: 10px;
-        
       }
 
       .close:hover {
@@ -93,7 +90,7 @@
         background-color: $mainBackColor;
         cursor: pointer;
 
-        &:hover{
+        &:hover {
           box-shadow: 0 4px 16px rgb(3, 39, 53);
           transition: all 0.2s ease;
         }

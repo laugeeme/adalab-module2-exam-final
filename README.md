@@ -30,12 +30,26 @@ La estructura de carpetas tiene esta pinta:
    |  |- icons
    |  |- images
    |  |- js
-   |  `- scss
-   |     `- core
-   |
-   `- templates
-      `- partials
+   |  |  `-main
+   |  |- scss
+   |  |   `|- components
+   |  |    |       `- _aside
+   |  |    |       `- _header
+   |  |    |       `- _main
+   |  |     - core
+   |  |    |       `- _reset
+   |  |    |       `- _settings
+   |  |    |- main
+   |  |
+   |  |- templates
+   |  |   `|- partials
+   |  |    |      `- _aside
+   |  |    |       `- _header
+   |  |    |       `- _main
+   |  |    |
+   |  |    |-index
 
+   
 ```
 
 >## Usage :clipboard:

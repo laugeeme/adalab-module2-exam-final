@@ -1,8 +1,31 @@
 .main-title {
   text-align: center;
   font-family: $mainFont;
-  color: $mainBackColor;
-  font-size: 50px;
-  text-shadow: rgb(170, 165, 165) 4px 2px;
-  background-color: $secondBackColor;
+  text-transform: uppercase;
+  font-size: 60px;
+  background: url(../images/animated_text_fill3.png.svg)
+  repeat-y;
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  /* Animate Background Image */
+
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: aitf 80s linear infinite;
+
+  /* Activate hardware acceleration for smoother animations */
+
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+}
+
+/* Animate Background Image */
+
+@-webkit-keyframes aitf {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }
