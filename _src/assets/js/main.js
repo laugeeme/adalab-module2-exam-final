@@ -1,6 +1,6 @@
 'use strict';
 
-const urlBase = 'http://api.tvmaze.com/search/shows?q=';
+const urlBase = 'https://api.tvmaze.com/search/shows?q=';
 const ulElem = document.querySelector('.tvShows-list');
 const favElem = document.querySelector('#favouritesList');
 const inputValue = document.querySelector('.searchInput');
