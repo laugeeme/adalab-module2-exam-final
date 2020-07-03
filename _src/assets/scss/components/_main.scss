@@ -1,14 +1,26 @@
 .main-container {
-  margin-left: 380px;
-  text-align: center;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  flex-direction: column;
+  text-align: center;
+
+  @include forTablet {
+    flex-wrap: wrap;
+  }
+
+  @include forPc {
+    margin-left: 25vw;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
 
   & ul li {
-    margin: 20px;
     cursor: pointer;
-    text-align: center;
+    margin: 10px;
+
+    @include forPc {
+      margin: 20px;
+      text-align: center;
+    }
 
     & p {
       margin: auto;
@@ -19,9 +31,19 @@
 .tvShows-list {
   list-style: none;
   display: flex;
-  flex-wrap: wrap;
-  max-width: 90vw;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+
+  @include forTablet {
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  @include forPc {
+    max-width: 70vw;
+  }
 }
 
 .show-title {

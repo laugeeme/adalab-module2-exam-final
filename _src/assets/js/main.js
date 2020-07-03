@@ -6,6 +6,7 @@ const favElem = document.querySelector('#favouritesList');
 const inputValue = document.querySelector('.searchInput');
 const searchButton = document.querySelector('.buttonSearch');
 const deleteButton = document.querySelector('.delete-all_button');
+const title = document.getElementById('main-title');
 
 let tvShowsList = [];
 let localStorageFavourites = readLocalStorage();
@@ -16,8 +17,8 @@ function conectToApi() {
   ulElem.innerHTML = '';
 
   fetch(`${urlBase}` + inputName)
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
       tvShowsList = data;
       printTvShows(tvShowsList);
     });
@@ -31,6 +32,8 @@ function conectToApiIfEnter(evt) {
 
 //2.Function to print results from search (add item.show.id to compare if we don't have in favourites).
 function printTvShows(tvShowsArr) {
+
+
   for (let item of tvShowsArr) {
     const liElem = document.createElement('li');
     liElem.setAttribute('id', item.show.id);
@@ -57,10 +60,14 @@ function printTvShows(tvShowsArr) {
       );
     }
 
+
+
     if (obtainIndexOfLocalStorageFavouritesById(item.show.id) !== -1) {
       liElem.setAttribute('class', 'tvShow-list_item tvShowSelected'); //add class to show favoritedstyle in every search if favorited
     }
   }
+  title.classList.add('titleMove');
+  title.classList.remove('titleOnLoad');
   addClickListeners();
 }
 
@@ -99,7 +106,7 @@ function readLocalStorage() {
 
 //7.Function that relates the favorite with is ID, read and brings back the objetc to use it.
 function getTvShowObject(id) {
-  return tvShowsList.find(tvShow => tvShow.show.id === parseInt(id));
+  return tvShowsList.find((tvShow) => tvShow.show.id === parseInt(id));
 }
 
 //8.Function that saves and delete favourites as an object when click.

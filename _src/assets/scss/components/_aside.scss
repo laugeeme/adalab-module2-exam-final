@@ -1,39 +1,71 @@
 .page__aside {
   position: fixed;
-  width: 370px;
-  height: 100vh;
-  left: 0;
-  top: 120px;
+  width: 100vw;
+  height: 40vh;
+  text-align: center;
+  bottom: 0;
   background: $secondBackColor;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 140px;
+
+  @include forTablet {
+    height: 30vh;
+  }
+
+  @include forPc {
+    position: fixed;
+    width: 370px;
+    height: 100vh;
+    left: 0;
+    top: 120px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 140px;
+    border-radius: 5px;
+  }
 
   .search-container {
-    padding-bottom: 15px;
+    margin-bottom: 2vh;
+
     .searchInput {
-      width: 250px;
-      height: 35px;
-      padding: 10px;
-      margin-left: 15px;
+      width: 65vw;
+      height: 6vh;
+      padding: 8px;
       margin-top: 20px;
       border: 2px solid grey;
       font-family: $mainFont;
       background-color: white;
       border-radius: 5px;
-      font-size: 18px;
+      font-size: 16px;
+
+      @include forTablet {
+        font-size: 18px;
+      }
+
+      @include forPc {
+        width: 250px;
+        height: 35px;
+        margin-left: 15px;
+        border: 2px solid grey;
+      }
     }
 
     .buttonSearch {
-      width: 80px;
-      height: 35px;
-      font-size: 20px;
+      width: 20vw;
+      height: 6vh;
+      font-size: 16px;
       font-family: $mainFont;
       border-radius: 5px;
       background-color: grey;
       color: white;
       cursor: pointer;
+
+      @include forTablet {
+        font-size: 20px;
+      }
+
+      @include forPc {
+        width: 80px;
+        height: 35px;
+      }
 
       &:hover {
         box-shadow: 0 4px 16px rgb(3, 39, 53);
@@ -46,19 +78,53 @@
     overflow-y: scroll;
 
     .favourites {
+      display: flex;
+      flex-direction: row;
+
+      @include forPc {
+        flex-direction: column;
+      }
+
       & li {
-        padding: 15px;
+        padding: 10px;
         list-style-type: none;
-        text-align: center;
-        display: inline-block;
-        margin-left: 60px;
+
+        @include forPc {
+          padding: 15px;
+          list-style-type: none;
+          text-align: center;
+          display: inline-block;
+        }
+
+        & img {
+          width: 50px;
+
+          @include forTablet {
+            width: 70px;
+          }
+
+          @include forPc {
+            width: 150px;
+          }
+        }
 
         & p {
           font-family: $mainFont;
-          font-size: 18px;
-          width: 170px;
-          height: 50px;
+          font-size: 14px;
+          width: 150px;
+          height: 32px;
           margin: auto;
+
+          @include forTablet {
+            font-size: 16px;
+          }
+
+          @include forPc {
+            font-size: 18px;
+            width: 170px;
+            height: 50px;
+            margin: auto;
+          }
         }
       }
 
@@ -75,20 +141,29 @@
     }
 
     .delete-all_container {
-      align-items: baseline;
-      text-align: center;
+      @include forTablet {
+      }
 
-      padding-bottom: 20px;
+      @include forPc {
+        align-items: baseline;
+        text-align: center;
+      }
 
       .delete-all_button {
-        width: 160px;
-        height: 35px;
-        font-size: 16px;
+        width: 140px;
+        height: 30px;
+        font-size: 14px;
         font-family: $mainFont;
         border-radius: 5px;
         color: white;
         background-color: $mainBackColor;
         cursor: pointer;
+
+        @include forPc {
+          width: 160px;
+          height: 35px;
+          font-size: 16px;
+        }
 
         &:hover {
           box-shadow: 0 4px 16px rgb(3, 39, 53);

@@ -1,5 +1,7 @@
-@import 'core/settings';
-@import 'core/reset';
+@import 'utils/variables';
+@import 'utils/reset';
+@import 'utils/mixins';
+@import 'utils/structure';
 @import 'components/header';
 @import 'components/main';
 @import 'components/aside';
