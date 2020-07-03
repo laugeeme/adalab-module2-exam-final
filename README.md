@@ -6,7 +6,7 @@
 El ejercicio consiste en desarrollar una aplicación web de búsqueda de series de TV, que nos permite des/marcar las series como favoritas y guardarlas en local storage.
 
 <div align="center">
-       <img src="./public/assets/images/web.png" width="600px"</img>
+       <img src="./_src/assets/images/web.png" width="600px"</img>
 </div>
 
 
