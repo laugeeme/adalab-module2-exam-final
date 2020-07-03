@@ -1,7 +1,7 @@
 # :movie_camera: BUSCADOR DE SERIES   :movie_camera:
 
 
->### Module 2 - final evaluation - laurageeme :rocket:
+>### Module 2 - final evaluation - laugeeme :rocket:
 
 El ejercicio consiste en desarrollar una aplicación web de búsqueda de series de TV, que nos permite des/marcar las series como favoritas y guardarlas en local storage.
 
