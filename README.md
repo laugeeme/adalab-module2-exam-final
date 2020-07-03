@@ -5,6 +5,11 @@
 
 El ejercicio consiste en desarrollar una aplicación web de búsqueda de series de TV, que nos permite des/marcar las series como favoritas y guardarlas en local storage.
 
+<div align="center">
+       <img src="./public/assets/images/web.png" width="600px"</img>
+</div>
+
+
 >## Herramientas  :wrench:
 
 Para el desarrollo de este ejercicio hemos utilizado la siguiente [API](http://www.tvmaze.com/api#show-search)
@@ -49,7 +54,7 @@ La estructura de carpetas tiene esta pinta:
    |  |    |
    |  |    |-index
 
-   
+
 ```
 
 >## Usage :clipboard:
